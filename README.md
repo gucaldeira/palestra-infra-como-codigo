@@ -8,9 +8,9 @@ usando como exemplo uma aplicação escrita em GO que calcula a sequência de fi
 Você deverá criar a sua configuração da AWS copiando o arquivo aws.tf.dist para aws.tf e inserindo suas chaves de API da AWS
 
 ## Etapas
-O projeto está implantado em três etapas separadas em branchies conforme descrito:
+O projeto está implantado em três etapas separadas em branchies (etapa-01, etapa-02, etapa-03) conforme descrito:
 
-### Etapa 01 (branch b-etapa-01)
+### Etapa 01 (branch etapa-01)
 
 Na primeira etapa serão criados os seguintes elementos
 
@@ -42,7 +42,7 @@ docker tag fib:latest {id_do_registry}.dkr.ecr.us-east-1.amazonaws.com/fib:lates
 docker push {id_do_registry}.dkr.ecr.us-east-1.amazonaws.com/fib:latest
 ```
 
-### Etapa 02 (branch b-etapa-02)
+### Etapa 02
 
 Na segunda etapa serão criados os seguintes elementos:
 
