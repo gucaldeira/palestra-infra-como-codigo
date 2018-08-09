@@ -1,9 +1,13 @@
-FROM golang:1.8
+FROM golang:1.8 AS builder
 
-WORKDIR /go/src/app
+WORKDIR /go/src/fib
 COPY fib.go .
+RUN go build /go/src/fib/fib.go
 
-RUN go get -d -v ./...
-RUN go install -v ./...
+FROM debian:buster-slim
+EXPOSE 9090
 
-CMD ["app"]
+#Copy app jar file
+COPY --from=0 /go/src/fib/fib /usr/bin
+
+CMD ["fib"]
