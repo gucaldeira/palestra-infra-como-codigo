@@ -1,4 +1,4 @@
 tf/aws.tf
 tf/terraform.tfstate
 tf/terraform.tfstate.backup
-tf/.terraform
+tf/.terraform*
