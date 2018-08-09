@@ -18,7 +18,9 @@ func fib(n int) uint {
 }
 
 func fibServer(w http.ResponseWriter, r *http.Request) {
-	
+    
+    fmt.Println("path", r.URL.Path)
+
 	r.ParseForm()
 	n, err := strconv.Atoi(r.FormValue("n"))
     if err != nil {

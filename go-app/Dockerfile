@@ -10,4 +10,4 @@ EXPOSE 9090
 #Copy app jar file
 COPY --from=0 /go/src/fib/fib /usr/bin
 
-CMD ["fib"]
+ENTRYPOINT ["fib"]
