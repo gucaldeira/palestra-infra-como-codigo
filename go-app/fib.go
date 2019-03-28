@@ -22,11 +22,10 @@ func fibServer(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
 	n, err := strconv.Atoi(r.FormValue("n"))
     if err != nil {
-		fmt.Println("Error")
 		return
     }
 
-    fmt.Println("n", r.FormValue("n"))
+    fmt.Println("Calulando fib de", r.FormValue("n"))
 	
     fmt.Fprintf(w, fmt.Sprintf("%v",fib(n)))
 }

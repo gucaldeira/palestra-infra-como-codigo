@@ -1,13 +1,11 @@
-FROM golang:1.8 AS builder
+FROM golang:1.12 AS builder
 
 WORKDIR /go/src/fib
 COPY fib.go .
 RUN go build /go/src/fib/fib.go
 
-FROM debian:buster-slim
+FROM gcr.io/distroless/base
+
 EXPOSE 9090
-
-#Copy app jar file
-COPY --from=0 /go/src/fib/fib /usr/bin
-
-ENTRYPOINT ["fib"]
+COPY --from=builder /go/src/fib/fib /
+CMD ["/fib"]
