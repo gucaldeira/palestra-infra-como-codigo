@@ -44,3 +44,7 @@ resource "aws_alb_listener" "fib_http" {
     type             = "forward"
   }
 }
+
+output "fib_alb_dns_name" {
+  value = "${aws_alb.fib.dns_name}"
+}

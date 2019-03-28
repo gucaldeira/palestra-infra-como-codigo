@@ -16,7 +16,7 @@ resource "aws_appautoscaling_policy" "fib_up" {
 
   step_scaling_policy_configuration {
     adjustment_type         = "ChangeInCapacity"
-    cooldown                = 60
+    cooldown                = 120
     metric_aggregation_type = "Maximum"
 
     step_adjustment {
@@ -36,11 +36,12 @@ resource "aws_appautoscaling_policy" "fib_down" {
 
   step_scaling_policy_configuration {
     adjustment_type         = "ChangeInCapacity"
-    cooldown                = 60
+    cooldown                = 120
     metric_aggregation_type = "Maximum"
 
     step_adjustment {
-      metric_interval_lower_bound = 0
+      metric_interval_lower_bound = -10
+      metric_interval_upper_bound = 0
       scaling_adjustment          = -1
     }
   }
@@ -57,7 +58,7 @@ resource "aws_cloudwatch_metric_alarm" "fib_service_cpu_high" {
   namespace           = "AWS/ECS"
   period              = "60"
   statistic           = "Average"
-  threshold           = "65"
+  threshold           = "70"
 
   dimensions {
     ClusterName = "${aws_ecs_cluster.fib_cluster.name}"
@@ -65,5 +66,25 @@ resource "aws_cloudwatch_metric_alarm" "fib_service_cpu_high" {
   }
 
   alarm_actions = ["${aws_appautoscaling_policy.fib_up.arn}"]
-  ok_actions    = ["${aws_appautoscaling_policy.fib_down.arn}"]
+  #ok_actions    = ["${aws_appautoscaling_policy.fib_down.arn}"]
+}
+
+
+resource "aws_cloudwatch_metric_alarm" "fib_service_cpu_low" {
+  alarm_name          = "fib_cpu_utilization_low"
+  comparison_operator = "LessThanOrEqualToThreshold"
+  evaluation_periods  = "2"
+  metric_name         = "CPUUtilization"
+  namespace           = "AWS/ECS"
+  period              = "120"
+  statistic           = "Average"
+  threshold           = "40"
+
+  dimensions {
+    ClusterName = "${aws_ecs_cluster.fib_cluster.name}"
+    ServiceName = "${aws_ecs_service.fib.name}"
+  }
+
+  alarm_actions = ["${aws_appautoscaling_policy.fib_down.arn}"]
+  #ok_actions    = ["${aws_appautoscaling_policy.fib_down.arn}"]
 }

@@ -33,7 +33,7 @@ resource "aws_ecs_task_definition" "fib" {
   container_definitions    = "${data.template_file.fib.rendered}"
   requires_compatibilities = ["FARGATE"]
   network_mode             = "awsvpc"
-  cpu                      = "0.25vcpu"
+  cpu                      = "256"
   memory                   = "512"
   execution_role_arn       = "${aws_iam_role.ecs_task_assume_fib.arn}"
 }
