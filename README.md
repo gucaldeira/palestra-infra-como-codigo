@@ -8,7 +8,7 @@ usando como exemplo uma aplicação escrita em GO que calcula a sequência de fi
 Você deverá criar a sua configuração da AWS copiando o arquivo aws.tf.dist para aws.tf e inserindo suas chaves de API da AWS
 
 ## Etapas
-O projeto está implantado em três etapas separadas em branchies (etapa-01, etapa-02, etapa-03) conforme descrito:
+O projeto está implantado em três etapas separadas em branches (etapa-01, etapa-02, etapa-03) conforme descrito:
 
 ### Etapa 01 (branch etapa-01)
 
